@@ -4,13 +4,25 @@ class Graphmatch
   # The edges must be specified as a hash of hashes, the keys being left vertices
   # and the values be a hash of right vertices and the weights to them.
   #
-  # Ex. Matching ['a', 'b'] to [1, 2], restrict it so 'a' can only reach 2.
+  # Ex. 
+  #     Matching ['a', 'b'] to [1, 2], restrict it so 'a' can only reach 2.
   #     All path lengths are uniform (= 0)
   #
-  #      left_vertices = ["a", "b"]
-  #      right_vertices = [1, 2]
+  #      left = ["a", "b"]
+  #      right = [1, 2]
   #      edges = {"a" => {2 => 0},
   #               "b" => {1 => 0, 2 >= 0}}
+  #      Graphmatch.match(left, right, edges)
+  # 
+  # Ex.
+  #     Matching ['a', 'b'] to ['y', 'z'] with edge weights. 'a' is matched to 'y',
+  #     'b' is matched to 'z'
+  #
+  #     left = ['a', 'b']
+  #     right ['y', z']
+  #     edges = {'a' => {'y' => 1, 'z' => 100},
+  #              'b' => {'y' => 100, 'z' => 1}}
+  #     Graphmatch.match(left, right, edges, search = :min_cost)
   #
   # If the path lengths are equal, set search to :shortest_path
   # If the path lengths vary, set search to :min_cost to optimize for min-cost max-flow
