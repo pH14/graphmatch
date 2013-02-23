@@ -46,18 +46,31 @@ class GraphmatchTest < Test::Unit::TestCase
     r = Graphmatch.match(left, right, edges, search = :min_cost)
     assert_equal({'a' => 3, 'b' => 2, 'c' => 1}, r)
   end
-  
-  def test_inverted_matching
+
+  def test_mincost_path_negative_weights
     left = ['a', 'b', 'c']
     right = [1, 2, 3]
-    edges = {'a' => {2 => 0},
-             'b' => {2 => 0, 3 => 0},
-             'c' => {1 => 0, 3 => 0}}
+    edges = {'a' => {1 => 10, 2 => -10, 3 => 0},
+             'b' => {1 => -10, 2 => 0, 3 => 10},
+             'c' => {1 => 0, 2 => 10, 3 => -10}}
 
-    r = Graphmatch.match(left, right, edges)
-    r_inv = Graphmatch.invert_matching(r)
-    assert_equal({2 => "a", 3 => "b", 1 => "c"}, r_inv)
+    r = Graphmatch.match(left, right, edges, search = :min_cost)
+    assert_equal({'a' => 2, 'b' => 1, 'c' => 3}, r)
   end
 
+  def test_mincost_overmatch
+    left = ['a', 'b', 'c', 'd', 'e', 'f']
+    right = [1, 2, 3]
+
+    edges = {'a' => {1 => 50, 2 => 50, 3 => 50},
+             'b' => {1 => 40, 2 => 40, 3 => 40},
+             'c' => {1 => 30, 2 => 30, 3 => 30},
+             'd' => {1 => 20, 2 => 20, 3 => 20},
+             'e' => {1 => 10, 2 => 10, 3 => 10},
+             'f' => {1 => 0, 2 => 0, 3 => 0}}
+
+    r = Graphmatch.match(left, right, edges, search = :min_cost)
+    assert_equal(['f', 'e', 'd'].to_set, r.keys.to_set)
+  end
 end
 
