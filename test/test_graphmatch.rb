@@ -43,7 +43,21 @@ class GraphmatchTest < Test::Unit::TestCase
              'b' => {1 => 10, 2 => 1, 3 => 100},
              'c' => {1 => 1, 2 => 100, 3 => 10}}
 
-    r = Graphmatch.match(left, right, edges, search=:Bellman)
+    r = Graphmatch.match(left, right, edges, search = :min_cost)
     assert_equal({'a' => 3, 'b' => 2, 'c' => 1}, r)
   end
+  
+  def test_inverted_matching
+    left = ['a', 'b', 'c']
+    right = [1, 2, 3]
+    edges = {'a' => {2 => 0},
+             'b' => {2 => 0, 3 => 0},
+             'c' => {1 => 0, 3 => 0}}
+
+    r = Graphmatch.match(left, right, edges)
+    r_inv = Graphmatch.invert_matching(r)
+    assert_equal({2 => "a", 3 => "b", 1 => "c"}, r_inv)
+  end
+
 end
+
