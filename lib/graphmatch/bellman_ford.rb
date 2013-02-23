@@ -1,5 +1,12 @@
 class Graphmatch::BellmanFord
-  def self.search(graph, source = :source, sink = :sink)
+  # Implementation of the Bellman-Ford algorithm
+  #
+  # Finds the min-cost between the starting vertex and all other vertices.
+  #
+  # @param graph [Hash] contains vertices and edge weights
+  # @param source [Symbol] starting vertex
+  # @return distance, parent [Hash, Hash] distance from :source, parents of each vertex
+  def self.search(graph, source = :source)
     distance = {}
     parent = {}
 

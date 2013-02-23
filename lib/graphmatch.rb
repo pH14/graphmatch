@@ -1,4 +1,25 @@
 class Graphmatch
+  # Optimally match two sets of vertices.
+  #
+  # The edges must be specified as a hash of hashes, the keys being left vertices
+  # and the values be a hash of right vertices and the weights to them.
+  #
+  # Ex. Matching ['a', 'b'] to [1, 2], restrict it so 'a' can only reach 2.
+  #     All path lengths are uniform (= 0)
+  #
+  #      left_vertices = ["a", "b"]
+  #      right_vertices = [1, 2]
+  #      edges = {"a" => {2 => 0},
+  #               "b" => {1 => 0, 2 >= 0}}
+  #
+  # If the path lengths are equal, set search to :shortest_path
+  # If the path lengths vary, set search to :min_cost to optimize for min-cost max-flow
+  #
+  # @param left_vertices [Array] list of names of vertices on the left
+  # @param right_vertices [Array] list of names of vertices on the right
+  # @param edges [Hash] a hash of hashes, edges and their weights from left to right
+  # @param search [Symbol] the augmentation path search type, :shortest_path or :min_cost 
+  # @return [Hash] keys are left vertices, values are right vertices
   def self.match(left_vertices, right_vertices, edges, search = :shortest_path)
     vertices = left_vertices + right_vertices + [:sink, :source]
 
