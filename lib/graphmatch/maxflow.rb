@@ -4,7 +4,7 @@ class Graphmatch::Maxflow
   # Returns a hash representing the matching.
   def self.best_matching!(graph, source = :source, sink = :sink)
     loop do
-      path = augmenting_path graph
+      path = augmenting_path_bellman graph
       break unless path
       augment_flow_graph! graph, path
     end
@@ -39,6 +39,49 @@ class Graphmatch::Maxflow
       path << [parents[current_vertex], current_vertex]
       current_vertex = parents[current_vertex]
     end
+    path.reverse!
+  end
+
+  def self.augmenting_path_bellman(graph, source = :source, sink = :sink)
+    distance = {}
+    parent = {}
+
+    graph[:vertices].each do |v|
+      distance[v] = (v == source) ? 0 : Float::INFINITY 
+      parent[v] = nil
+    end
+
+    graph[:vertices].each do |vertex|
+      graph[:edges].map do |u, neighbors|
+        graph[:edges][u].map do |v, w|
+          #puts "Edge: #{u} to #{v} with weight #{w}"
+
+          if distance[u] + w < distance[v]
+            distance[v] = distance[u] + w
+            parent[v] = u
+          end
+        end
+      end
+    end
+
+    graph[:edges].map do |u, neighbors|
+      graph[:edges][u].map do |v, w|
+
+        if distance[u] + w < distance[v]
+          puts "Graph contains negative-weight cycle"
+        end
+      end
+    end
+
+    return nil unless parent[sink]
+
+    path = []
+    current_vertex = sink
+    until current_vertex == source
+      path << [parent[current_vertex], current_vertex]
+      current_vertex = parent[current_vertex]
+    end
+
     path.reverse!
   end
 
