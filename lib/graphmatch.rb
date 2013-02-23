@@ -24,7 +24,7 @@ class Graphmatch
   #              'b' => {'y' => 100, 'z' => 1}}
   #     Graphmatch.match(left, right, edges, search = :min_cost)
   #
-  # If the path lengths are equal, set search to :shortest_path
+  # If the path lengths are equal, set search to :shortest_path.
   # If the path lengths vary, set search to :min_cost to optimize for min-cost max-flow
   #
   # @param left_vertices [Array] list of names of vertices on the left
