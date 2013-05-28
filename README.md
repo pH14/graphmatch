@@ -3,7 +3,7 @@ graphmatch
 
 Optimal bipartite graph matching algorithm gem for Ruby. It uses the Ford-Fulkerson max-flow algorithm with a super-source and super-sink to maximally match graphs.
 
-The augmentation paths are found with either breadth-first search or Bellman-Ford. BFS is faster for unweighted matching, while Bellman-Ford can be used for min-cost max-flow matching given the edge weights.
+The augmentation paths are found with either breadth-first search or Bellman-Ford. BFS is faster for unweighted matching, while Bellman-Ford can be used for min-cost max-flow matching given the edge weights. _Note: for weighted matching with Ford-Fulkerson, the edge weights must be integers otherwise the algorithm may not be able to determine a matching!_
 
 Further documentation can be found here: http://rubydoc.info/gems/graphmatch/
 
