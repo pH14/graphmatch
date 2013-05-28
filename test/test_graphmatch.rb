@@ -73,4 +73,3 @@ class GraphmatchTest < Test::Unit::TestCase
     assert_equal(['f', 'e', 'd'].to_set, r.keys.to_set)
   end
 end
-

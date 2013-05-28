@@ -39,6 +39,10 @@ class Graphmatch::Maxflow
     until current_vertex == source
       path << [parents[current_vertex], current_vertex]
       current_vertex = parents[current_vertex]
+
+      if path.length > parents.length
+        raise "Cannot terminate. Use integral edge weights."
+      end
     end
     path.reverse!
   end

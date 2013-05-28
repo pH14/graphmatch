@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'graphmatch'
-  s.version     = '1.0.0'
-  s.date        = '2013-02-23'
+  s.version     = '1.0.1'
+  s.date        = '2013-05-28'
   s.summary     = "Optimal bipartite graph matching"
-  s.description = "An implementation of the Ford-Fulkerson max-flow algorithm." \
+  s.description = "An implementation of the Ford-Fulkerson max-flow algorithm for maximum matching." \
                   "Supports maximum flow as well as minimum-cost maximum flow."
   s.authors     = ["Paul Hemberger", "Victor Costan"]
   s.email       = 'pwh@mit.edu'
