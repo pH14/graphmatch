@@ -34,3 +34,8 @@ edges = {'a' => {1 => 100, 2 => 10, 3 => 1},
 Graphmatch.match(left, right, edges)
 ==> {'a' => 3, 'b' => 2, 'c' => 1}
 </pre>
+
+## Related Libraries
+
+- [graph_matching](https://github.com/jaredbeck/graph_matching) - Maximum cardinality 
+  and maximum weighted matchings in undirected graphs, both bipartite and general.
