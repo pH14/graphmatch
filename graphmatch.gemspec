@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
                   "Supports maximum flow as well as minimum-cost maximum flow."
   s.authors     = ["Paul Hemberger", "Victor Costan"]
   s.email       = 'pwh@mit.edu'
-  s.files       = `git ls-files`.split("\n")
+  s.files       = Dir.glob("{lib,test}/**/*")
   s.require_paths = ["lib"]
   s.homepage    =
     'http://rubygems.org/gems/graphmatch'
